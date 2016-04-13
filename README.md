@@ -17,3 +17,8 @@ developer: [http://aics.my] (AiCS Businesses)
 AiCS Businesses is a Malaysian based web developer resides in Kuala Lumpur
 ---
 forks and suggestions are appreciated!, feel free to create issues if you found bug
+
+
+This plugin created just to help online entrepreneurs using wordpress out there to enable ipay88 to their site.
+This plugin is created on `13 April 2016` By [https://github.com/aifaiz/] (AiFAiZ).
+We hardly find people do this and it is hard to google. Hope this help!
