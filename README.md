@@ -11,7 +11,7 @@ Upload all the contents of this repo to the plugins folder and its good to go
 5. go to your woocommerce checkout settings
 6. Happy selling!
 
-developer: [http://aics.my] (AiCS Businesses)
+developer: [http://aics.my](AiCS Businesses)
 ![alt text](http://aics.my/aicontent/themes/aics2016/inc/blog-logo.png "AiCS Businesses")
 ---
 AiCS Businesses is a Malaysian based web developer resides in Kuala Lumpur
@@ -20,7 +20,7 @@ forks and suggestions are appreciated!, feel free to create issues if you found 
 
 
 This plugin created just to help online entrepreneurs using wordpress out there to enable ipay88 to their site.
-This plugin is created on `13 April 2016` By: [https://github.com/aifaiz] (AiFAiZ) .
+This plugin is created on `13 April 2016` By: [https://github.com/aifaiz](AiFAiZ) .
 We hardly find people do this and it is hard to google. Hope this help!
 
 ---
@@ -29,5 +29,5 @@ p/s : we are not associated with ipay88. Code are developed from scratch and aft
 
 credits to:
 
-1. [https://getbootstrap.com] (Bootstrap css) used for layout
-2. [http://www.wpexplorer.com/wordpress-page-templates-plugin] (WPEXPLORER) used to create custom page template to process payment
+1. [https://getbootstrap.com](Bootstrap) used for layout
+2. [http://www.wpexplorer.com/wordpress-page-templates-plugin](WPEXPLORER) used to create custom page template to process payment
