@@ -1,11 +1,12 @@
 <?php
-defined( 'ABSPATH' ) or die( 'The hell? nope.. just nope' );
 /*
  * Class : Faiz_ipay_gateway
  * Author: AiFAiZ
  * website: http://aics.my
  * email: faiz@aics.my
  */
+defined( 'ABSPATH' ) or die( 'The hell? nope.. just nope' );
+
 class Faiz_ipay_gateway extends WC_Payment_Gateway{
     private $merchantID;
     private $merchantCode;

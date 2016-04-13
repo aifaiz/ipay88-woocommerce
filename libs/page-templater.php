@@ -1,7 +1,7 @@
 <?php
-defined( 'ABSPATH' ) or die( 'The hell? nope.. just nope' );
 // page templater, followed tutorial from:
 // http://www.wpexplorer.com/wordpress-page-templates-plugin/
+defined( 'ABSPATH' ) or die( 'The hell? nope.. just nope' );
 class PageTemplater {
 		
 		protected $plugin_slug;
