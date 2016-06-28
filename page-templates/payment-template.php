@@ -2,16 +2,7 @@
 <?php
 global $woocomerce;
 $gateway = new Faiz_ipay_gateway();
-$response = $gateway->getResponse();
-if(isset($response['Status'])):
-    $responsed = 'ok';
-    wp_redirect($gateway->get_return_url($response['RefNo']));
-    exit;
-elseif(isset($_GET['oid']) && !empty($_GET['oid'])):
-    // do nothing.
-else:
-    exit;
-endif;
+processResponse();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,9 +18,12 @@ endif;
         <![endif]-->
     </head>
     <body>
-        <?php /* if(isset($responsed) && $responsed == 'ok'): ?>
+        <?php
+        // for debugging
+        /* if(isset($responsed) && $responsed == 'ok'): ?>
             <pre><?php print_r($response); ?></pre>
-        <?php endif; */ ?>
+        <?php endif; */
+        ?>
         <div class="container text-center">
             <h1>Processing</h1><hr>
             <p>Please wait while we redirect you to the payment site.</p>

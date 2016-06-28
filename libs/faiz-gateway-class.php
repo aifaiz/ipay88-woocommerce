@@ -160,4 +160,42 @@ class Faiz_ipay_gateway extends WC_Payment_Gateway{
         
         return compact('MerchantCode','PaymentId','RefNo','Amount','Currency','Remark','TransId','AuthCode','Status','ErrDesc','Signature');
     }
+	
+	function validateResponse($data){
+		global $woocommerce;	
+		$mcode = $data['MerchantCode'];
+		$payid = $data['PaymentId'];
+		$refno = $data['RefNo'];
+		$amt_txt = $data['Amount'];
+		$cur = $data['Currency'];
+		$ret_sign = $data['Signature'];
+		$status = $data['Status'];
+		
+		$amnt = str_replace(',', '', $amt_txt);
+		$amnt_final = str_replace('.', '', $amnt);
+		$combined = $this->merchantID.$mcode.$payid.$refno.$amnt_final.$cur.$status;
+		$signed = $this->iPay88_signature($combined);
+		
+		if($status == 1):
+			if($signed == $ret_sign):
+				//echo 'sign ok';
+				$order = new WC_Order( $refno );
+				$order->update_status('wc-completed', __( 'Completed', 'woocommerce' ));
+				$order->payment_complete();
+				$redirect = $order->get_checkout_order_received_url();
+				wp_redirect($redirect);
+				exit;
+			else:
+				echo 'payment failed.';
+				$woocommerce->cart->empty_cart();
+				//wp_redirect('checkout');
+				exit;
+			endif;
+		else:
+			echo 'payment failed.';
+			$woocommerce->cart->empty_cart();
+			//wp_redirect('checkout');
+			exit;
+		endif;
+	}
 }
