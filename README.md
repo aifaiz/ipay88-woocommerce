@@ -12,7 +12,7 @@ Upload all the contents of this repo to the plugins folder and its good to go
 6. Happy selling!
 
 developer: [AiCS Businesses](http://aics.my)
-![alt text](http://aics.my/aicontent/themes/aics2016/inc/blog-logo.png "AiCS Businesses")
+![alt text](http://aics.my/templates/aics/img/logo.png "AiCS Businesses")
 ---
 AiCS Businesses is a Malaysian based web developer resides in Kuala Lumpur
 ---
