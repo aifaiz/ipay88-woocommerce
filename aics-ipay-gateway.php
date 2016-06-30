@@ -31,8 +31,5 @@ function processResponse(){
 	$response = $gateway->getResponse();
 	if(isset($response['Status'])):
 		$gateway->validateResponse($response);
-	else:
-		echo "somethings wrong with the response";
-		exit;
 	endif;
 }
