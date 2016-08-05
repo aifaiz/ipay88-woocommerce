@@ -12,6 +12,7 @@ Upload all the contents of this repo to the plugins folder and its good to go
 6. Happy selling!
 
 developer: [AiCS Businesses](http://aics.my)
+
 ![AiCS](http://aics.my/templates/aics/img/aics-web-logo.png "AiCS Businesses")
 
 AiCS Businesses is a Malaysian based web developer resides in Kuala Lumpur
@@ -28,7 +29,10 @@ We hardly find people do this and it is hard to google. Hope this help!
 p/s : we are not associated with ipay88. Code are developed from scratch and after googling for wordpress codex.
 
 ---
+
 feel free to open issue [here](https://github.com/aifaiz/ipay88-woocommerce/issues)
+
+---
 
 credits to:
 
