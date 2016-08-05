@@ -162,40 +162,40 @@ class Faiz_ipay_gateway extends WC_Payment_Gateway{
     }
 	
 	function validateResponse($data){
-		global $woocommerce;	
-		$mcode = $data['MerchantCode'];
-		$payid = $data['PaymentId'];
-		$refno = $data['RefNo'];
-		$amt_txt = $data['Amount'];
-		$cur = $data['Currency'];
-		$ret_sign = $data['Signature'];
-		$status = $data['Status'];
+		global $woocommerce;
 		
-		$amnt = str_replace(',', '', $amt_txt);
-		$amnt_final = str_replace('.', '', $amnt);
-		$combined = $this->merchantID.$mcode.$payid.$refno.$amnt_final.$cur.$status;
-		$signed = $this->iPay88_signature($combined);
-		
-		if($status == 1):
-			if($signed == $ret_sign):
-				//echo 'sign ok';
-				$order = new WC_Order( $refno );
-				$order->update_status('wc-completed', __( 'Completed', 'woocommerce' ));
-				$order->payment_complete();
-				$redirect = $order->get_checkout_order_received_url();
-				wp_redirect($redirect);
-				exit;
-			else:
-				echo 'payment failed.';
-				$woocommerce->cart->empty_cart();
-				//wp_redirect('checkout');
-				exit;
+		if(isset($data['MerchantCode']) && isset($data['PaymentId']) && isset($data['RefNo']) && isset($data['Amount']) && isset($data['Currency']) && isset($data['Signature']) && isset($data['Status'])):
+			$mcode = $data['MerchantCode'];
+			$payid = $data['PaymentId'];
+			$refno = $data['RefNo'];
+			$amt_txt = $data['Amount'];
+			$cur = $data['Currency'];
+			$ret_sign = $data['Signature'];
+			$status = $data['Status'];
+			
+			$amnt = str_replace(',', '', $amt_txt);
+			$amnt_final = str_replace('.', '', $amnt);
+			$combined = $this->merchantID.$mcode.$payid.$refno.$amnt_final.$cur.$status;
+			$signed = $this->iPay88_signature($combined);
+			
+			if($status == 1):
+				if($signed == $ret_sign):
+					//echo 'sign ok';
+					$order = new WC_Order( $refno );
+					$order->update_status('wc-completed', __( 'Completed', 'woocommerce' ));
+					$order->payment_complete();
+					$redirect = $order->get_checkout_order_received_url();
+					wp_redirect($redirect);
+					exit;
+				else:
+					//echo 'payment failed.';
+					$order = new WC_Order( $refno );
+					$order->update_status('failed', __( 'Failed', 'woocommerce' ));
+					//$woocommerce->cart->empty_cart();
+					wp_redirect($this->get_return_url( $order ));
+					exit;
+				endif;
 			endif;
-		else:
-			echo 'payment failed.';
-			$woocommerce->cart->empty_cart();
-			//wp_redirect('checkout');
-			exit;
 		endif;
 	}
 }
