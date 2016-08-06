@@ -35,7 +35,7 @@ processResponse();
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script>
         $(document).ready(function(){
-            //$('#ipaysubmitForm').submit();
+            $('#ipaysubmitForm').submit();
         });
         </script>
   </body>
