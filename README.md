@@ -1,5 +1,13 @@
 # ipay88-woocommerce
 
+---
+
+![ipay88 woocommerce setting](/inc/screenshot/ipay88-checkout-setting.png?raw=true)
+
+![template on page](/inc/screenshot/page-template.png?raw=true)
+
+---
+
 Upload all the contents of this repo to the plugins folder and its good to go
 
 ### You can download this repo as ZIP file and upload it from wp-admin
