@@ -32,4 +32,7 @@ function processResponse(){
 	if(isset($response['Status'])):
 		$gateway->validateResponse($response);
 	endif;
+	if(isset($_GET['testpay']) && !empty($_GET['testpay'])):
+		$gateway->validateResponse($response);
+	endif;
 }

@@ -1,5 +1,7 @@
 <?php /* Template Name: Payment */ ?>
 <?php
+//echo'<pre>'.print_r($_REQUEST, true).'</pre>';
+//exit;
 global $woocomerce;
 $gateway = new Faiz_ipay_gateway();
 processResponse();
@@ -28,12 +30,12 @@ processResponse();
             <h1>Processing</h1><hr>
             <p>Please wait while we redirect you to the payment site.</p>
         </div>
-        <?php $oid = $_GET['oid']; $gateway->preparePayment($oid); ?>
+        <?php if(isset($_GET['oid']) && !empty($_GET['oid'])): $gateway->preparePayment($_GET['oid']); endif; ?>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script>
         $(document).ready(function(){
-            $('#ipaysubmitForm').submit();
+            //$('#ipaysubmitForm').submit();
         });
         </script>
   </body>
