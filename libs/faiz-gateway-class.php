@@ -195,7 +195,14 @@ class Faiz_ipay_gateway extends WC_Payment_Gateway{
 					wp_redirect($this->get_return_url( $order ));
 					exit;
 				endif;
+			elseif($status != 1 && $signed == $ret_sign):
+				$order = new WC_Order( $refno );
+				$order->update_status('failed', __( 'Failed', 'woocommerce' ));
+				//$woocommerce->cart->empty_cart();
+				wp_redirect($this->get_return_url( $order ));
+				exit;
 			endif;
+		
 		/*elseif(isset($_GET['testpay']) && !empty($_GET['testpay'])):
 			$order = new WC_Order( $_GET['testpay'] );
 			$order->update_status('failed', __( 'Failed', 'woocommerce' ));
