@@ -161,7 +161,7 @@ class Faiz_ipay_gateway extends WC_Payment_Gateway{
         return compact('MerchantCode','PaymentId','RefNo','Amount','Currency','Remark','TransId','AuthCode','Status','ErrDesc','Signature');
     }
 	
-	function validateResponse($data){
+	public function validateResponse($data){
 		global $woocommerce;
 		
 		if(isset($data['MerchantCode']) && isset($data['PaymentId']) && isset($data['RefNo']) && isset($data['Amount']) && isset($data['Currency']) && isset($data['Signature']) && isset($data['Status'])):
