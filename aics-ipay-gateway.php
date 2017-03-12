@@ -9,6 +9,7 @@ Version: 1.0.1
 defined( 'ABSPATH' ) or die( 'nope.. just nope' );
 
 $faiz_ipay_path = plugin_dir_path( __FILE__ );
+define( 'AICS_IPAY88_PATH', $faiz_ipay_path );
 
 include_once($faiz_ipay_path.'/libs/page-templater.php');
 
