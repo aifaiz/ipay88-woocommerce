@@ -4,7 +4,7 @@ Plugin Name: AiCS ipay88 Woocommerce
 Plugin URI: http://www.aics.my/
 Description: AiCS ipay88 gateway plugin for woocommerce
 Author: AiCS
-Version: 1.0
+Version: 1.0.1
 */
 defined( 'ABSPATH' ) or die( 'nope.. just nope' );
 

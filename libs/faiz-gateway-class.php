@@ -32,6 +32,18 @@ class Faiz_ipay_gateway extends WC_Payment_Gateway{
     }
     
     public function init_form_fields(){
+		
+		$pages = get_pages();
+		$poption = [];
+		foreach($pages as $page):
+			$poption[] = array($page->post_title=>$page->ID);
+		endforeach;
+		$paymentPageID = array(
+							   'title'=> __( 'Choose The Page That Set For Payment Template', 'aics' ),
+							   'type'=>'select',
+							   'label'=> __('list of wordpress pages to choose as payment page', 'aics'),
+							   'default'=>'1',
+							   'options'=>$poption);
         $this->form_fields = array(
                                    'enabled' => array(
                                                       'title' => __( 'Enable/Disable', 'aics' ),
@@ -55,11 +67,7 @@ class Faiz_ipay_gateway extends WC_Payment_Gateway{
                                                           'type' => 'text',
                                                           'default' => '0000000'
                                                         ),
-                                   'paymentPageID' => array(
-                                                          'title' => __( 'Page ID for ipay form', 'aics' ),
-                                                          'type' => 'text',
-                                                          'default' => '1'
-                                                        )
+                                   'paymentPageID' => $paymentPageID
                                    );
     }
     
