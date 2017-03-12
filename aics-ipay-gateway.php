@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: ipay88 woocommerce processing
+Plugin Name: AiCS ipay88 Woocommerce
 Plugin URI: http://www.aics.my/
-Description: Custom ipay88 gateway plugin for woocmmerce
-Author: FAiZ
-Version: 1.1
+Description: AiCS ipay88 gateway plugin for woocommerce
+Author: AiCS
+Version: 1.0
 */
-defined( 'ABSPATH' ) or die( 'The hell? nope.. just nope' );
+defined( 'ABSPATH' ) or die( 'nope.. just nope' );
 
 $faiz_ipay_path = plugin_dir_path( __FILE__ );
 

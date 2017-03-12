@@ -1,13 +1,13 @@
 # ipay88-woocommerce
 
 ### woocommerce checkout setting
-![ipay88 woocommerce setting](/inc/screenshot/ipay88-checkout-setting.png?raw=true)
+![ipay88 woocommerce setting](/assets/ipay88-checkout-setting.png?raw=true)
 
 ### create page and set payment as template
-![template on page](/inc/screenshot/page-template.png?raw=true)
+![template on page](/assets/page-template.png?raw=true)
 
 ### use page id in the checkout setting
-![how to get id page](/inc/screenshot/how-to-get-id-page.png?raw=true)
+![how to get id page](/assets/how-to-get-id-page.png?raw=true)
 
 ---
 
@@ -24,7 +24,7 @@ Upload all the contents of this repo to the plugins folder and its good to go
 
 developer: [AiCS Businesses](http://aics.my)
 
-![AiCS](http://aics.my/templates/aics/img/aics-web-logo.png "AiCS Businesses")
+![AiCS](http://customer.aics.my/templates/aics/img/aics-web-logo.png "AiCS Businesses")
 
 AiCS Businesses is a Malaysian based web developer resides in Kuala Lumpur
 ---
