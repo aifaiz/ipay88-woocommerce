@@ -7,7 +7,7 @@
 ![ipay88 woocommerce setting](/assets/ipay88-checkout-setting.png?raw=true)
 
 ### how it will look on processing payment
-![ipay88 woocommerce setting](/assets/payment-page.png?raw=true)
+![processing payment](/assets/payment-page.png?raw=true)
 
 ---
 
