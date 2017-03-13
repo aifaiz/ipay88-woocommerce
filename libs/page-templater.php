@@ -51,8 +51,7 @@ class PageTemplater{
 		);
 		global $faiz_ipay_path;
 		// Add your templates to this array.
-		$this->templates = array(
-			AICS_IPAY88_PATH.'payment-templates/payment-template.php' => 'Payment Template',
+		$this->templates = array('page-templates/payment-template.php' => 'Payment Template',
 		);	
 	} 
 	/**

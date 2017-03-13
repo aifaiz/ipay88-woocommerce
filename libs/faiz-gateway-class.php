@@ -36,7 +36,7 @@ class Faiz_ipay_gateway extends WC_Payment_Gateway{
 		$pages = get_pages();
 		$poption = [];
 		foreach($pages as $page):
-			$poption[] = array($page->post_title=>$page->ID);
+			$poption[$page->ID] = $page->post_title;
 		endforeach;
 		$paymentPageID = array(
 							   'title'=> __( 'Choose The Page That Set For Payment Template', 'aics' ),

@@ -1,7 +1,5 @@
 <?php /* Template Name: Payment */ ?>
 <?php
-//echo'<pre>'.print_r($_REQUEST, true).'</pre>';
-//exit;
 global $woocomerce;
 $gateway = new Faiz_ipay_gateway();
 processResponse();
