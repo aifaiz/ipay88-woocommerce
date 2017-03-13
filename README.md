@@ -6,9 +6,6 @@
 ### create page and set payment as template
 ![template on page](/assets/page-template.png?raw=true)
 
-### use page id in the checkout setting
-![how to get id page](/assets/how-to-get-id-page.png?raw=true)
-
 ---
 
 Upload all the contents of this repo to the plugins folder and its good to go
