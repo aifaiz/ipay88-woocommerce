@@ -6,6 +6,9 @@
 ### woocommerce checkout setting
 ![ipay88 woocommerce setting](/assets/ipay88-checkout-setting.png?raw=true)
 
+### how it will look on processing payment
+![ipay88 woocommerce setting](/assets/payment-page.png?raw=true)
+
 ---
 
 Upload all the contents of this repo to the plugins folder and its good to go
