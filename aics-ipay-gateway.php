@@ -2,34 +2,48 @@
 /*
 Plugin Name: AiCS ipay88 Woocommerce
 Plugin URI: http://www.aics.my/
-Description: AiCS ipay88 gateway plugin for woocommerce
+Description: AiCS Malaysian ipay88 gateway plugin for woocommerce
 Author: AiCS
-Version: 1.0.1
+Version: 1.0.2
 */
 defined( 'ABSPATH' ) or die( 'nope.. just nope' );
 
-$faiz_ipay_path = plugin_dir_path( __FILE__ );
-define( 'AICS_IPAY88_PATH', $faiz_ipay_path );
+$aics_ipay_path = plugin_dir_path( __FILE__ );
+$aics_ipay_uri = plugins_url( __FILE__ );
 
-include_once($faiz_ipay_path.'/libs/page-templater.php');
+define( 'AICS_IPAY88_PATH', $aics_ipay_path );
+define( 'AICS_IPAY88_URI', $aics_ipay_uri);
 
-function ipay_gateway(){
-    global $faiz_ipay_path;
-    include_once($faiz_ipay_path.'libs/faiz-gateway-class.php');
+include_once(AICS_IPAY88_PATH.'/libs/page-templater.php');
+
+if(!function_exists('aics_ipay_gateway')):
+function aics_ipay_gateway(){
+    include_once(AICS_IPAY88_PATH.'libs/faiz-gateway-class.php');
 }
-add_action('plugins_loaded', 'ipay_gateway');
+add_action('plugins_loaded', 'aics_ipay_gateway');
+endif;
 
-function add_ipay_gateway( $methods ) {
-	$methods[] = 'Faiz_ipay_gateway'; 
+if(!function_exists('aics_add_ipay_gateway')):
+function aics_add_ipay_gateway( $methods ) {
+	$methods[] = 'Aics_ipay_gateway'; 
 	return $methods;
 }
-
-add_filter( 'woocommerce_payment_gateways', 'add_ipay_gateway' );
+add_filter( 'woocommerce_payment_gateways', 'aics_add_ipay_gateway' );
+endif;
 
 // receive response on load template
-function processResponse(){
-	$gateway = new Faiz_ipay_gateway();
+if(!function_exists('aics_processResponse')):
+function aics_processResponse(){
+	$gateway = new Aics_ipay_gateway();
 	$response = $gateway->getResponse();
+	
+	/*
+	if(isset($_REQUEST['Status'])):
+		aics_debug($_REQUEST);
+		exit;
+	endif;
+	*/
+	 
 	if(isset($response['Status'])):
 		$gateway->validateResponse($response);
 	endif;
@@ -37,3 +51,38 @@ function processResponse(){
 		$gateway->validateResponse($response);
 	endif;
 }
+endif;
+// include extra css and js on the payment page template
+if(!function_exists('aics_include_extra_css_js')):
+function aics_include_extra_css_js(){
+	$ipay_gateway = new Aics_ipay_gateway();
+	if(isset($ipay_gateway->pageID) && !empty($ipay_gateway->pageID)):
+		if(is_page($ipay_gateway->pageID)):
+			wp_register_style('aics-bs-style', plugins_url('inc/css/bootstrap.min.css'));
+			wp_register_script('aics-bs-scrpt', plugins_url('inc/js/bootstrap.min.js'), ['jquery'],'3.3.7', true);
+			wp_enqueue_style('aics-bs-style');
+			wp_enqueue_script('aics-bs-scrpt');
+		endif;
+	endif;
+}
+add_action('wp_enqueue_scripts', 'aics_include_extra_css_js');
+endif;
+
+if(!function_exists('aics_payment_footer_js')):
+function aics_payment_footer_js(){
+	?>
+	<script>
+        jQuery(document).ready(function(){
+            jQuery('#ipaysubmitForm').submit();
+        });
+        </script>
+	<?php 
+}
+add_action('ipay_template','aics_payment_footer_js');
+endif;
+
+if(!function_exists('aics_debug')):
+	function aics_debug($var){
+		echo'<pre>'.print_r($var,true).'</pre>';
+	}
+endif;

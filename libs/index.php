@@ -1,2 +1,2 @@
 <?php // what?
-defined( 'ABSPATH' ) or die( 'The hell? nope.. just nope' );
+defined( 'ABSPATH' ) or die( 'nope.. just nope' );

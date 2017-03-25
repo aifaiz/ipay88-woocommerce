@@ -1,16 +1,16 @@
 <?php
 /*
- * Class : Faiz_ipay_gateway
+ * Class : Aics_ipay_gateway
  * Author: AiFAiZ
  * website: http://aics.my
  * email: faiz@aics.my
  */
-defined( 'ABSPATH' ) or die( 'The hell? nope.. just nope' );
+defined( 'ABSPATH' ) or die( 'nope.. just nope' );
 
-class Faiz_ipay_gateway extends WC_Payment_Gateway{
+class Aics_ipay_gateway extends WC_Payment_Gateway{
     private $merchantID;
     private $merchantCode;
-    private $pageID;
+    public $pageID;
 	
     public function __construct(){
         $this->id= 'woo_ipay88';
@@ -92,6 +92,8 @@ class Faiz_ipay_gateway extends WC_Payment_Gateway{
         if($test_pay == 'yes'):
             $amount = '1.00';
         endif;
+		
+		$amount = number_format((float)$amount, 2, '.', '');
         
         $currency = 'MYR'; //get_woocommerce_currency_symbol();
 		// currently we just need MYR support only
@@ -111,7 +113,7 @@ class Faiz_ipay_gateway extends WC_Payment_Gateway{
         $user_phone = get_user_meta($current_user->ID, 'billing_phone', true);
         
         $format_amt = $this->formatAmount($amount);
-        $the_string = $this->merchantID.$this->merchantCode.$order_id.$format_amt.$currency;
+        $the_string = $this->merchantCode.$this->merchantID.$order_id.$format_amt.$currency;
         //echo 'str: <b>'.$the_string.'</b>';
         $the_hash = $this->iPay88_signature($the_string);
         
@@ -119,7 +121,7 @@ class Faiz_ipay_gateway extends WC_Payment_Gateway{
         
         ?>
         <form id="ipaysubmitForm" action="<?php echo $post_url; ?>" method="POST">
-            <input type="hidden" name="MerchantCode" value="<?php echo $this->merchantCode; ?>">
+            <input type="hidden" name="MerchantCode" value="<?php echo $this->merchantID; ?>">
             <input type="hidden" name="PaymentId" value="">
             <input type="hidden" name="RefNo" value="<?php echo $order_id; ?>">
             <input type="hidden" name="Amount" value="<?php echo $amount; ?>">
@@ -183,7 +185,7 @@ class Faiz_ipay_gateway extends WC_Payment_Gateway{
 			
 			$amnt = str_replace(',', '', $amt_txt);
 			$amnt_final = str_replace('.', '', $amnt);
-			$combined = $this->merchantID.$mcode.$payid.$refno.$amnt_final.$cur.$status;
+			$combined = $mcode.$this->merchantID.$payid.$refno.$amnt_final.$cur.$status;
 			$signed = $this->iPay88_signature($combined);
 			
 			if($status == 1):
@@ -210,14 +212,6 @@ class Faiz_ipay_gateway extends WC_Payment_Gateway{
 				wp_redirect($this->get_return_url( $order ));
 				exit;
 			endif;
-		
-		/*elseif(isset($_GET['testpay']) && !empty($_GET['testpay'])):
-			$order = new WC_Order( $_GET['testpay'] );
-			$order->update_status('failed', __( 'Failed', 'woocommerce' ));
-			//$woocommerce->cart->empty_cart();
-			wp_redirect($this->get_return_url( $order ));
-			exit;
-		*/
 		endif;
 	}
 }

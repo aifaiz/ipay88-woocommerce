@@ -2,7 +2,7 @@
 // page templater, followed tutorial from:
 // http://www.wpexplorer.com/wordpress-page-templates-plugin/
 defined( 'ABSPATH' ) or die( 'nope.. just nope' );
-class PageTemplater{
+class AicsPageTemplater{
 	/**
 	 * A reference to an instance of this class.
 	 */
@@ -16,7 +16,7 @@ class PageTemplater{
 	 */
 	public static function get_instance(){
 		if ( null == self::$instance ){
-			self::$instance = new PageTemplater();
+			self::$instance = new AicsPageTemplater();
 		}
 		return self::$instance;
 	} 
@@ -49,9 +49,8 @@ class PageTemplater{
 			'template_include', 
 			array( $this, 'view_project_template') 
 		);
-		global $faiz_ipay_path;
 		// Add your templates to this array.
-		$this->templates = array('page-templates/payment-template.php' => 'Payment Template',
+		$this->templates = array('page-templates/payment-template.php' => 'iPay Payment Template',
 		);	
 	} 
 	/**
@@ -117,4 +116,4 @@ class PageTemplater{
 	}
 } 
 
-add_action( 'plugins_loaded', array( 'PageTemplater', 'get_instance' ));
+add_action( 'plugins_loaded', array( 'AicsPageTemplater', 'get_instance' ));
