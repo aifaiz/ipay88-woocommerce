@@ -11,16 +11,23 @@
 
 ---
 
-Upload all the contents of this repo to the plugins folder and its good to go
+## How to get the plugin
 
-### You can download this repo as ZIP file and upload it from wp-admin
+1. Download here and install from your admin https://wordpress.org/plugins/aics-ipay88-woocommerce
+2. Download this repo and upload all the contents of this repo to the plugins folder and its good to go
 
-1. upload plugin [using ftp or zip]
+### You could also download this repo as ZIP file and upload it from wp-admin
+
+1. upload plugin [using ftp or zip] OR search for `aics ipay88 woocommerce` in the add plugin page inside admin
 2. activate plugin
 3. go to pages and create new page.
 4. the new page let it be blank and choose "Payment" template
 5. go to your woocommerce checkout settings
 6. Happy selling!
+
+### However the most recomended way to install is trough the wordpress plugins directory search page
+
+![installing from wordpress plugins search page](/assets/install-from-plugins-directory.png)
 
 developer: [AiCS Businesses](http://aics.my)
 
