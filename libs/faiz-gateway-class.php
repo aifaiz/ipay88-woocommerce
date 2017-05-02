@@ -58,12 +58,12 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
                                                       'default' => 'no'
                                                     ),
                                    'merchantID' => array(
-                                                          'title' => __( 'Merchant ID', 'aics' ),
+                                                          'title' => __( 'Merchant Code', 'aics' ),
                                                           'type' => 'text',
                                                           'default' => '0000000'
                                                         ),
                                    'merchantCode' => array(
-                                                          'title' => __( 'Merchant Code', 'aics' ),
+                                                          'title' => __( 'Merchant Key', 'aics' ),
                                                           'type' => 'text',
                                                           'default' => '0000000'
                                                         ),
