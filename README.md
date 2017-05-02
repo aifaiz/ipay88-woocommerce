@@ -22,7 +22,8 @@
 5. go to your woocommerce checkout settings
 6. Happy selling!
 
-### However the most recomended way to install is trough the wordpress plugins directory search page
+---
+### Most recomended way to install, (trough the wordpress plugins directory search)
 
 ![installing from wordpress plugins search page](/assets/install-from-plugins-directory.png)
 
