@@ -5,7 +5,7 @@ Plugin URI: http://www.aics.my/
 Description: AiCS Malaysian ipay88 gateway plugin for woocommerce
 Author: AiCS
 Author URI: http://aics.my/
-Version: 1.0.4
+Version: 1.1.0
 */
 defined( 'ABSPATH' ) or die( 'nope.. just nope' );
 

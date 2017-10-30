@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) or die( 'nope.. just nope' );
 
 class Aics_ipay_gateway extends WC_Payment_Gateway{
     private $merchantID;
-    private $merchantCode;
+    private $merchantKey;
     public $pageID;
 	
     public function __construct(){
@@ -24,7 +24,7 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
         // after init_settins();
         $this->title = 'ipay88 Payment Gateway';
         $this->merchantID = $this->get_option( 'merchantID' );
-        $this->merchantCode = $this->get_option('merchantCode');
+        $this->merchantKey = $this->get_option('merchantKey');
         $this->pageID = $this->get_option('paymentPageID');
         
         add_action('woocommerce_update_options_payment_gateways_'.$this->id, array(&$this, 'process_admin_options'));
@@ -54,15 +54,15 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
                                    'testingPayment' => array(
                                                       'title' => __( 'Testing/Live', 'aics' ),
                                                       'type' => 'checkbox',
-                                                      'label' => __( 'Testing payment or live payment', 'aics' ),
+                                                      'label' => __( 'Testing payment? (check if testing)', 'aics' ),
                                                       'default' => 'no'
                                                     ),
                                    'merchantID' => array(
-                                                          'title' => __( 'Merchant Code', 'aics' ),
+                                                          'title' => __( 'Merchant ID', 'aics' ),
                                                           'type' => 'text',
                                                           'default' => '0000000'
                                                         ),
-                                   'merchantCode' => array(
+                                   'merchantKey' => array(
                                                           'title' => __( 'Merchant Key', 'aics' ),
                                                           'type' => 'text',
                                                           'default' => '0000000'
@@ -113,7 +113,7 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
         $user_phone = get_user_meta($current_user->ID, 'billing_phone', true);
         
         $format_amt = $this->formatAmount($amount);
-        $the_string = $this->merchantCode.$this->merchantID.$order_id.$format_amt.$currency;
+        $the_string = $this->merchantKey.$this->merchantID.$order_id.$format_amt.$currency;
         //echo 'str: <b>'.$the_string.'</b>';
         $the_hash = $this->iPay88_signature($the_string);
         
@@ -148,6 +148,7 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
     }
     
     public function hex2bin($hexSource){
+		$bin = '';
         for ($i=0;$i<strlen($hexSource);$i=$i+2){
             $bin .= chr(hexdec(substr($hexSource,$i,2)));
         }
@@ -185,7 +186,7 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
 			
 			$amnt = str_replace(',', '', $amt_txt);
 			$amnt_final = str_replace('.', '', $amnt);
-			$combined = $mcode.$this->merchantID.$payid.$refno.$amnt_final.$cur.$status;
+			$combined = $this->merchantKey.$this->merchantID.$payid.$refno.$amnt_final.$cur.$status;
 			$signed = $this->iPay88_signature($combined);
 			
 			if($status == 1):
