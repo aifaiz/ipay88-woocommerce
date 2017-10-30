@@ -35,7 +35,7 @@
 
 developer: [AiCS Businesses](http://aics.my)
 
-![AiCS](http://customer.aics.my/templates/aics/img/aics-web-logo.png "AiCS Businesses")
+![AiCS](https://aics.my/assets/themes/aicstheme/img/aics-web-logo.png "AiCS Businesses")
 ---
 
 
