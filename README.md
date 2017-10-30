@@ -7,6 +7,12 @@
 ![template on page](/assets/page-template.png?raw=true)
 
 ---
+### Coming Soon (im not sure when i had time for this)
+
+1. Remove custom template and change to custom URL instead.
+2. Record transaction in database and create admin page for it.
+
+---
 
 ## How to get the plugin
 
@@ -30,6 +36,8 @@
 developer: [AiCS Businesses](http://aics.my)
 
 ![AiCS](http://customer.aics.my/templates/aics/img/aics-web-logo.png "AiCS Businesses")
+---
+
 
 AiCS Businesses is a Malaysian based web developer resides in Kuala Lumpur
 ---
