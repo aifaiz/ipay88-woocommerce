@@ -2,7 +2,7 @@
 /*
  * Class : Aics_ipay_gateway
  * Author: AiFAiZ
- * website: http://aics.my
+ * website: https://aics.my
  * email: faiz@aics.my
  */
 defined( 'ABSPATH' ) or die( 'nope.. just nope' );
@@ -28,7 +28,6 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
         $this->pageID = $this->get_option('paymentPageID');
         
         add_action('woocommerce_update_options_payment_gateways_'.$this->id, array(&$this, 'process_admin_options'));
-        
     }
     
     public function init_form_fields(){
@@ -52,7 +51,7 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
                                                       'default' => 'yes'
                                                     ),
                                    'testingPayment' => array(
-                                                      'title' => __( 'Testing/Live', 'aics' ),
+                                                      'title' => __( 'Testing or Live', 'aics' ),
                                                       'type' => 'checkbox',
                                                       'label' => __( 'Testing payment? (check if testing)', 'aics' ),
                                                       'default' => 'no'
@@ -95,7 +94,8 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
 		
 		$amount = number_format((float)$amount, 2, '.', '');
         
-        $currency = 'MYR'; //get_woocommerce_currency_symbol();
+        $currency = 'MYR';
+		//get_woocommerce_currency_symbol();
 		// currently we just need MYR support only
         
         $order_items = $order->get_items();
@@ -110,7 +110,16 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
         endforeach;
         
         $current_user = wp_get_current_user();
-        $user_phone = get_user_meta($current_user->ID, 'billing_phone', true);
+		if(isset($current_user->ID) && !empty($current_user->ID)):
+			$user_phone = get_user_meta($current_user->ID, 'billing_phone', true);
+			$user_fullname = $current_user->user_firstname.' '.$current_user->user_user_lastname;
+			$user_email = $current_user->user_email;
+		else:
+			$user_phone = $order->get_billing_phone();
+			$user_fullname = $order->get_billing_first_name().' '.$order->get_billing_last_name();
+			$user_email = $order->get_billing_email();
+		endif;
+		
         
         $format_amt = $this->formatAmount($amount);
         $the_string = $this->merchantKey.$this->merchantID.$order_id.$format_amt.$currency;
@@ -127,8 +136,8 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
             <input type="hidden" name="Amount" value="<?php echo $amount; ?>">
             <input type="hidden" name="Currency" value="<?php echo $currency; ?>">
             <input type="hidden" name="ProdDesc" value="<?php echo $item; ?>">
-            <input type="hidden" name="UserName" value="<?php echo $current_user->user_firstname.' '.$current_user->user_user_lastname; ?>">
-            <input type="hidden" name="UserEmail" value="<?php echo $current_user->user_email; ?>">
+            <input type="hidden" name="UserName" value="<?php echo $user_fullname; ?>">
+            <input type="hidden" name="UserEmail" value="<?php echo $user_email; ?>">
             <input type="hidden" name="UserContact" value="<?php echo $user_phone; ?>">
             <input type="hidden" name="Lang" value="UTF-8">
             <input type="hidden" name="Signature" value="<?php echo $the_hash; ?>">
@@ -211,6 +220,48 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
 				$order->update_status('failed', __( 'Failed', 'woocommerce' ));
 				//$woocommerce->cart->empty_cart();
 				wp_redirect($this->get_return_url( $order ));
+				exit;
+			endif;
+		endif;
+	}
+	
+	public function backendResponse($data){
+		global $woocommerce;
+		$echo = 'RECEIVEOK';
+		
+		if(isset($data['MerchantCode']) && isset($data['PaymentId']) && isset($data['RefNo']) && isset($data['Amount']) && isset($data['Currency']) && isset($data['Signature']) && isset($data['Status'])):
+			$mcode = $data['MerchantCode'];
+			$payid = $data['PaymentId'];
+			$refno = $data['RefNo'];
+			$amt_txt = $data['Amount'];
+			$cur = $data['Currency'];
+			$ret_sign = $data['Signature'];
+			$status = $data['Status'];
+			
+			$amnt = str_replace(',', '', $amt_txt);
+			$amnt_final = str_replace('.', '', $amnt);
+			$combined = $this->merchantKey.$this->merchantID.$payid.$refno.$amnt_final.$cur.$status;
+			$signed = $this->iPay88_signature($combined);
+			
+			if($status == 1):
+				if($signed == $ret_sign):
+					//echo 'sign ok';
+					$order = new WC_Order( $refno );
+					$order->update_status('wc-completed', __( 'Completed', 'woocommerce' ));
+					$order->payment_complete();
+					echo $echo;
+					exit;
+				else:
+					//echo 'payment failed.';
+					$order = new WC_Order( $refno );
+					$order->update_status('failed', __( 'Failed', 'woocommerce' ));
+					echo $echo;
+					exit;
+				endif;
+			elseif($status != 1 && $signed == $ret_sign):
+				$order = new WC_Order( $refno );
+				$order->update_status('failed', __( 'Failed', 'woocommerce' ));
+				echo $echo;
 				exit;
 			endif;
 		endif;

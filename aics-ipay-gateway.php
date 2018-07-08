@@ -1,12 +1,13 @@
 <?php
 /*
 Plugin Name: AiCS ipay88 Woocommerce
-Plugin URI: http://www.aics.my/
+Plugin URI: https://aics.my/
 Description: AiCS Malaysian ipay88 gateway plugin for woocommerce
 Author: AiCS
-Author URI: http://aics.my/
-Version: 1.1.0
+Author URI: http://hamizulfaiz.com/
+Version: 1.2.0
 */
+
 defined( 'ABSPATH' ) or die( 'nope.. just nope' );
 
 $aics_ipay_path = plugin_dir_path( __FILE__ );
@@ -37,13 +38,6 @@ if(!function_exists('aics_processResponse')):
 function aics_processResponse(){
 	$gateway = new Aics_ipay_gateway();
 	$response = $gateway->getResponse();
-	
-	/*
-	if(isset($_REQUEST['Status'])):
-		aics_debug($_REQUEST);
-		exit;
-	endif;
-	*/
 	 
 	if(isset($response['Status'])):
 		$gateway->validateResponse($response);
@@ -53,6 +47,7 @@ function aics_processResponse(){
 	endif;
 }
 endif;
+
 // include extra css and js on the payment page template
 if(!function_exists('aics_include_extra_css_js')):
 function aics_include_extra_css_js(){
@@ -72,18 +67,23 @@ endif;
 if(!function_exists('aics_payment_footer_js')):
 function aics_payment_footer_js(){
 	?>
-	<script>
-        jQuery(document).ready(function(){
-            jQuery('#ipaysubmitForm').submit();
-        });
-        </script>
+	<script>jQuery(document).ready(function(){jQuery('#ipaysubmitForm').submit();});</script>
 	<?php 
 }
 add_action('ipay_template','aics_payment_footer_js');
 endif;
 
 if(!function_exists('aics_debug')):
-	function aics_debug($var){
-		echo'<pre>'.print_r($var,true).'</pre>';
-	}
+	function aics_debug($var){echo'<pre>'.print_r($var,true).'</pre>';}
+endif;
+
+if(!function_exists('aics_backend_response')):
+function aics_backend_response(){
+	$ipay88 = new Aics_ipay_gateway();
+	$response = $gateway->getResponse();
+	if(isset($response['Status'])):
+		$ipay88->backendResponse($response);
+	endif;
+}
+add_action('init', 'aics_backend_response');
 endif;
