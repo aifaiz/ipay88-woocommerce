@@ -1,3 +1,5 @@
+![ipay88 woocommerce payment gateway](https://hamizulfaiz.com/hf-file/photos/shares/donate/5b41dee212609.jpg)
+
 # ipay88-woocommerce
 
 ### woocommerce checkout setting
@@ -14,12 +16,12 @@
 
 ---
 
-## How to get the plugin
+## 2 Way to get the plugin (choose one)
 
 1. Download here and install from your admin https://wordpress.org/plugins/aics-ipay88-woocommerce
 2. Download this repo and upload all the contents of this repo to the plugins folder and its good to go
 
-### You could also download this repo as ZIP file and upload it from wp-admin
+### You could also download this repo as ZIP file and upload it from wp-admin (if you dont want to use the wordpress plugins repo)
 
 1. upload plugin [using ftp or zip] OR search for `aics ipay88 woocommerce` in the add plugin page inside admin
 2. activate plugin
@@ -55,6 +57,7 @@ p/s : we are not associated with ipay88. Code are developed from scratch and aft
 ---
 
 feel free to open issue [here](https://github.com/aifaiz/ipay88-woocommerce/issues)
+Donate to me for the future of the plugin development [donate here](https://hamizulfaiz.com/donate/plugin/ipay88/woocommerce)
 
 ---
 
@@ -62,3 +65,4 @@ credits to:
 
 1. [Bootstrap](https://getbootstrap.com) used for layout
 2. [WPEXPLORER](http://www.wpexplorer.com/wordpress-page-templates-plugin) used to create custom page template to process payment
+
