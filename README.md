@@ -18,8 +18,8 @@
 
 ## 2 Way to get the plugin (choose one)
 
-1. Download here and install from your admin https://wordpress.org/plugins/aics-ipay88-woocommerce
-2. Download this repo and upload all the contents of this repo to the plugins folder and its good to go
+1. Download and install from your admin. or from wordpress repo https://wordpress.org/plugins/aics-ipay88-woocommerce
+2. Download this repo as `zip` and upload all the contents of this repo to the `plugins folder` and its good to go (dont forget to activate the plugin first)
 
 ### You could also download this repo as ZIP file and upload it from wp-admin (if you dont want to use the wordpress plugins repo)
 
@@ -35,9 +35,8 @@
 
 ![installing from wordpress plugins search page](/assets/install-from-plugins-directory.png)
 
-developer: [AiCS Businesses](http://aics.my)
+developer: [Hamizulfaiz](https://hamizulfaiz.com)
 
-![AiCS](https://aics.my/assets/themes/aicstheme/img/aics-web-logo.png "AiCS Businesses")
 ---
 
 
