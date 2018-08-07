@@ -40,6 +40,11 @@ search for `aics ipay88 woocommerce` in the add plugin page inside admin
 developer: [Hamizulfaiz](https://hamizulfaiz.com)
 
 ---
+### Backend URL support
+
+ipay88 now requires merchant to have `backend URL`. we have included it on the plugin. it needs to be `enable/disable` from the settings.
+
+---
 
 Hamizulfaiz is a Malaysian based web developer resides in Kuala Lumpur.
 ---
