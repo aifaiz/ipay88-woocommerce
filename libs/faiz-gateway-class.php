@@ -66,7 +66,14 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
                                                           'type' => 'text',
                                                           'default' => '0000000'
                                                         ),
-                                   'paymentPageID' => $paymentPageID
+                                   'paymentPageID' => $paymentPageID,
+								   'backendURL'=> array(
+														'title'=> __('Enable Backend URL', 'aics'),
+														'type' => 'select',
+														'label'=> __('enable or disable the backend URL feature', 'aics'),
+														'default'=>'no',
+														'options'=>['yes'=>'Enable', 'no'=>'Disable']
+														)
                                    );
     }
     
@@ -127,6 +134,8 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
         $the_hash = $this->iPay88_signature($the_string);
         
         $response_url = get_permalink($this->pageID);
+		
+		$backend_url = $this->get_option('backendURL');
         
         ?>
         <form id="ipaysubmitForm" action="<?php echo $post_url; ?>" method="POST">
@@ -142,6 +151,9 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
             <input type="hidden" name="Lang" value="UTF-8">
             <input type="hidden" name="Signature" value="<?php echo $the_hash; ?>">
             <input type="hidden" name="ResponseURL" value="<?php echo $response_url; ?>">
+			<?php if(isset($backend_url) && $backend_url == 'yes'): ?>
+			<input type="hidden" name="BackendURL" value="<?php echo site_url(); ?>">
+			<?php endif; ?>
         </form>
         <?php 
     }
