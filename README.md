@@ -2,8 +2,8 @@
 
 # ipay88-woocommerce
 
-### woocommerce checkout setting
-![ipay88 woocommerce setting](/assets/ipay88-checkout-setting.png?raw=true)
+### woocommerce payment setting
+![ipay88 woocommerce payment setting](/assets/ipay88-checkout-setting.png?raw=true)
 
 ### create page and set payment as template
 ![template on page](/assets/page-template.png?raw=true)
