@@ -23,7 +23,7 @@
 
 ### You could also download this repo as ZIP file and upload it from wp-admin (if you dont want to use the wordpress plugins repo)
 
-1. upload plugin [using ftp or zip] OR search for `aics ipay88 woocommerce` in the add plugin page inside admin
+1. upload plugin [using ftp or zip]
 2. activate plugin
 3. go to pages and create new page.
 4. the new page let it be blank and choose "Payment" template
@@ -33,21 +33,24 @@
 ---
 ### Most recomended way to install, (trough the wordpress plugins directory search)
 
+search for `aics ipay88 woocommerce` in the add plugin page inside admin
+
 ![installing from wordpress plugins search page](/assets/install-from-plugins-directory.png)
 
 developer: [Hamizulfaiz](https://hamizulfaiz.com)
 
 ---
 
-
-AiCS Businesses is a Malaysian based web developer resides in Kuala Lumpur
+Hamizulfaiz is a Malaysian based web developer resides in Kuala Lumpur.
 ---
 forks and suggestions are appreciated!, feel free to create issues if you found bug
 
 
-This plugin created just to help online entrepreneurs using wordpress out there to enable ipay88 to their site.
+This plugin created just to help online entrepreneurs using `wordpress woocommerce` out there to enable ipay88 to their site.
 This plugin is created on `13 April 2016` By: [AiFAiZ](https://github.com/aifaiz) .
 We hardly find people do this and it is hard to google. Hope this help!
+
+buy me a coffee? : [buy coffee for me](https://hamizulfaiz.com/donate/plugin/ipay88/woocommerce) 
 
 ---
 
@@ -57,7 +60,7 @@ p/s : we are not associated with ipay88. Code are developed from scratch and aft
 
 feel free to open issue [here](https://github.com/aifaiz/ipay88-woocommerce/issues)
 
-Donate to me for the future of the plugin development [donate here](https://hamizulfaiz.com/donate/plugin/ipay88/woocommerce)
+Donate to me for the future of the plugin development [donate to me](https://hamizulfaiz.com/donate/plugin/ipay88/woocommerce)
 
 ---
 
