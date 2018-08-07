@@ -80,7 +80,7 @@ endif;
 if(!function_exists('aics_backend_response')):
 function aics_backend_response(){
 	$ipay88 = new Aics_ipay_gateway();
-	$response = $gateway->getResponse();
+	$response = $ipay88->getResponse();
 	if(isset($response['Status'])):
 		$ipay88->backendResponse($response);
 	endif;
