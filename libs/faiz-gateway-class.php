@@ -262,19 +262,19 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
 					$order->update_status('wc-completed', __( 'Completed', 'woocommerce' ));
 					$order->payment_complete();
 					echo $echo;
-					exit;
+					// exit;
 				else:
 					//echo 'payment failed.';
 					$order = new WC_Order( $refno );
 					$order->update_status('failed', __( 'Failed', 'woocommerce' ));
 					echo $echo;
-					exit;
+					// exit;
 				endif;
 			elseif($status != 1 && $signed == $ret_sign):
 				$order = new WC_Order( $refno );
 				$order->update_status('failed', __( 'Failed', 'woocommerce' ));
 				echo $echo;
-				exit;
+				// exit;
 			endif;
 		endif;
 	}
