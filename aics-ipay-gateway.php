@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: AiCS ipay88 Woocommerce
-Plugin URI: https://aics.my/
-Description: AiCS Malaysian ipay88 gateway plugin for woocommerce
+Plugin URI: https://hamizulfaiz.com/
+Description: Malaysian ipay88 payment gateway for woocommerce
 Author: AiCS
 Author URI: http://hamizulfaiz.com/
-Version: 1.3
+Version: 1.3.2
 */
 
 defined( 'ABSPATH' ) or die( 'nope.. just nope' );
@@ -81,7 +81,8 @@ if(!function_exists('aics_backend_response')):
 function aics_backend_response(){
 	$ipay88 = new Aics_ipay_gateway();
 	$response = $ipay88->getResponse();
-	if(isset($response['Status'])):
+    $backendUrlParam = $_REQUEST['backendipay'];
+	if(isset($backendUrlParam) && $backendUrlParam == '1'):
 		$ipay88->backendResponse($response);
 	endif;
 }

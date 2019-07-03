@@ -3,7 +3,7 @@ Contributors: aics
 Donate link: http://aics.my/
 Tags: ipay88, payment gateway, woocommerce
 Requires at least: 4.6
-Tested up to: 4.9
+Tested up to: 5.2
 Stable tag: 4.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html

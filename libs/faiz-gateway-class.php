@@ -137,6 +137,7 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
 		
 		$backend_url = $this->get_option('backendURL');
         
+        $site_url = site_url();
         ?>
         <form id="ipaysubmitForm" action="<?php echo $post_url; ?>" method="POST">
             <input type="hidden" name="MerchantCode" value="<?php echo $this->merchantID; ?>">
@@ -152,7 +153,7 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
             <input type="hidden" name="Signature" value="<?php echo $the_hash; ?>">
             <input type="hidden" name="ResponseURL" value="<?php echo $response_url; ?>">
 			<?php if(isset($backend_url) && $backend_url == 'yes'): ?>
-			<input type="hidden" name="BackendURL" value="<?php echo site_url(); ?>">
+			<input type="hidden" name="BackendURL" value="<?php echo $site_url.'?backendipay=1'; ?>">
 			<?php endif; ?>
         </form>
         <?php 
@@ -222,7 +223,7 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
 				else:
 					//echo 'payment failed.';
 					$order = new WC_Order( $refno );
-					$order->update_status('failed', __( 'Failed', 'woocommerce' ));
+					$order->update_status('failed', __( 'Failed. Signature not match', 'woocommerce' ));
 					//$woocommerce->cart->empty_cart();
 					wp_redirect($this->get_return_url( $order ));
 					exit;
@@ -266,7 +267,7 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
 				else:
 					//echo 'payment failed.';
 					$order = new WC_Order( $refno );
-					$order->update_status('failed', __( 'Failed', 'woocommerce' ));
+					$order->update_status('failed', __( 'Failed. Signature does not match', 'woocommerce' ));
 					echo $echo;
 					// exit;
 				endif;
