@@ -89,7 +89,7 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
     
     // only call this when want to generate form.
     public function preparePayment($order_id){
-        $post_url = 'https://www.mobile88.com/ePayment/entry.asp';
+        $post_url = 'https://payment.ipay88.com.my/epayment/entry.asp';
         $test_pay = $this->get_option('testingPayment');
         
         $order = wc_get_order( $order_id );
