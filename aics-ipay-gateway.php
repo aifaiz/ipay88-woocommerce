@@ -5,7 +5,7 @@ Plugin URI: https://hamizulfaiz.com/
 Description: Malaysian ipay88 payment gateway for woocommerce
 Author: AiCS
 Author URI: http://hamizulfaiz.com/
-Version: 1.3.2
+Version: 1.4.0
 */
 
 defined( 'ABSPATH' ) or die( 'nope.. just nope' );

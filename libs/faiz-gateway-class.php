@@ -2,8 +2,8 @@
 /*
  * Class : Aics_ipay_gateway
  * Author: AiFAiZ
- * website: https://aics.my
- * email: faiz@aics.my
+ * website: https://hamizulfaiz.com
+ * email: me@hamizulfaiz.com
  */
 defined( 'ABSPATH' ) or die( 'nope.. just nope' );
 
@@ -37,54 +37,55 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
 		foreach($pages as $page):
 			$poption[$page->ID] = $page->post_title;
 		endforeach;
-		$paymentPageID = array(
-							   'title'=> __( 'Choose The Page That Set For Payment Template', 'aics' ),
-							   'type'=>'select',
-							   'label'=> __('list of wordpress pages to choose as payment page', 'aics'),
-							   'default'=>'1',
-							   'options'=>$poption);
-        $this->form_fields = array(
-                                   'enabled' => array(
-                                                      'title' => __( 'Enable/Disable', 'aics' ),
-                                                      'type' => 'checkbox',
-                                                      'label' => __( 'Enable ipay88 gateway', 'aics' ),
-                                                      'default' => 'yes'
-                                                    ),
-                                   'testingPayment' => array(
-                                                      'title' => __( 'Testing or Live', 'aics' ),
-                                                      'type' => 'checkbox',
-                                                      'label' => __( 'Testing payment? (check if testing)', 'aics' ),
-                                                      'default' => 'no'
-                                                    ),
-                                   'merchantID' => array(
-                                                          'title' => __( 'Merchant ID', 'aics' ),
-                                                          'type' => 'text',
-                                                          'default' => '0000000'
-                                                        ),
-                                   'merchantKey' => array(
-                                                          'title' => __( 'Merchant Key', 'aics' ),
-                                                          'type' => 'text',
-                                                          'default' => '0000000'
-                                                        ),
-                                   'paymentPageID' => $paymentPageID,
-								   'backendURL'=> array(
-														'title'=> __('Enable Backend URL', 'aics'),
-														'type' => 'select',
-														'label'=> __('enable or disable the backend URL feature', 'aics'),
-														'default'=>'no',
-														'options'=>['yes'=>'Enable', 'no'=>'Disable']
-														)
-                                   );
+		$paymentPageID = [
+            'title'=> __( 'Choose The Page That Set For Payment Template', 'aics' ),
+            'type'=>'select',
+            'label'=> __('list of wordpress pages to choose as payment page', 'aics'),
+            'default'=>'1',
+            'options'=>$poption
+        ];
+        $this->form_fields = [
+            'enabled' => [
+                'title' => __( 'Enable/Disable', 'aics' ),
+                'type' => 'checkbox',
+                'label' => __( 'Enable ipay88 gateway', 'aics' ),
+                'default' => 'yes'
+            ],
+            'testingPayment' => [
+                'title' => __( 'Testing or Live', 'aics' ),
+                'type' => 'checkbox',
+                'label' => __( 'Testing payment? (check if testing)', 'aics' ),
+                'default' => 'no'
+            ],
+            'merchantID' => [
+                'title' => __( 'Merchant ID', 'aics' ),
+                'type' => 'text',
+                'default' => '0000000'
+            ],
+            'merchantKey' => [
+                'title' => __( 'Merchant Key', 'aics' ),
+                'type' => 'text',
+                'default' => '0000000'
+            ],
+            'paymentPageID' => $paymentPageID,
+            'backendURL'=> [
+                'title'=> __('Enable Backend URL', 'aics'),
+                'type' => 'select',
+                'label'=> __('enable or disable the backend URL feature', 'aics'),
+                'default'=>'no',
+                'options'=>['yes'=>'Enable', 'no'=>'Disable']
+            ]
+        ];
     }
     
     public function process_payment( $order_id ){
         global $woocommerce;
-        $order          = wc_get_order( $order_id );
+        $order  = wc_get_order( $order_id );
         $payment_page = get_permalink($this->pageID).'?oid='.$order_id;
-        return array(
-			'result'   => 'success',
-			'redirect' => $payment_page
-		);
+        return [
+            'result'   => 'success',
+            'redirect' => $payment_page
+		];
     }
     
     // only call this when want to generate form.
