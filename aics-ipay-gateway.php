@@ -36,15 +36,16 @@ endif;
 // receive response on load template
 if(!function_exists('aics_processResponse')):
 function aics_processResponse(){
-	$gateway = new Aics_ipay_gateway();
-	$response = $gateway->getResponse();
-	 
-	if(isset($response['Status'])):
-		$gateway->validateResponse($response);
-	endif;
-	if(isset($_GET['testpay']) && !empty($_GET['testpay'])):
-		$gateway->validateResponse($response);
-	endif;
+	if(isset($_REQUEST['response']) && $_REQUEST['response'] == '1'):
+        $gateway = new Aics_ipay_gateway();
+        $response = $gateway->getResponse();
+        if(isset($response['Status'])):
+            $gateway->validateResponse($response);
+        endif;
+        if(isset($_GET['testpay']) && !empty($_GET['testpay'])):
+            $gateway->validateResponse($response);
+        endif;
+    endif;
 }
 endif;
 
@@ -78,6 +79,7 @@ if(!function_exists('aics_debug')):
 endif;
 
 if(!function_exists('aics_backend_response')):
+
 function aics_backend_response(){
 	$ipay88 = new Aics_ipay_gateway();
 	$response = $ipay88->getResponse();

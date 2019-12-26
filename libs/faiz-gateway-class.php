@@ -151,7 +151,7 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
             <input type="hidden" name="UserContact" value="<?php echo $user_phone; ?>">
             <input type="hidden" name="Lang" value="UTF-8">
             <input type="hidden" name="Signature" value="<?php echo $the_hash; ?>">
-            <input type="hidden" name="ResponseURL" value="<?php echo $response_url; ?>">
+            <input type="hidden" name="ResponseURL" value="<?php echo $response_url.'?response=1'; ?>">
 			<?php if(isset($backend_url) && $backend_url == 'yes'): ?>
 			<input type="hidden" name="BackendURL" value="<?php echo $site_url.'?backendipay=1'; ?>">
 			<?php endif; ?>
@@ -210,31 +210,22 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
 			$amnt_final = str_replace('.', '', $amnt);
 			$combined = $this->merchantKey.$this->merchantID.$payid.$refno.$amnt_final.$cur.$status;
 			$signed = $this->iPay88_signature($combined);
-			
-			if($status == 1):
-				if($signed == $ret_sign):
-					//echo 'sign ok';
-					$order = new WC_Order( $refno );
-					$order->update_status('wc-completed', __( 'Completed', 'woocommerce' ));
-					$order->payment_complete();
-					$redirect = $order->get_checkout_order_received_url();
-					wp_redirect($redirect);
-					exit;
-				else:
-					//echo 'payment failed.';
-					$order = new WC_Order( $refno );
-					$order->update_status('failed', __( 'Failed. Signature not match', 'woocommerce' ));
-					//$woocommerce->cart->empty_cart();
-					wp_redirect($this->get_return_url( $order ));
-					exit;
-				endif;
-			elseif($status != 1 && $signed == $ret_sign):
-				$order = new WC_Order( $refno );
+            
+            if($status == '1' && $signed == $ret_sign):
+                //echo 'sign ok';
+                $order = new WC_Order( $refno );
+                $order->update_status('wc-completed', __( 'Completed', 'woocommerce' ));
+                $order->payment_complete();
+                $redirect = $order->get_checkout_order_received_url();
+                wp_redirect($redirect);
+                exit;
+            else:
+                $order = new WC_Order( $refno );
 				$order->update_status('failed', __( 'Failed', 'woocommerce' ));
 				//$woocommerce->cart->empty_cart();
 				wp_redirect($this->get_return_url( $order ));
 				exit;
-			endif;
+            endif;
 		endif;
 	}
 	
@@ -255,28 +246,19 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
 			$amnt_final = str_replace('.', '', $amnt);
 			$combined = $this->merchantKey.$this->merchantID.$payid.$refno.$amnt_final.$cur.$status;
 			$signed = $this->iPay88_signature($combined);
-			
-			if($status == 1):
-				if($signed == $ret_sign):
-					//echo 'sign ok';
-					$order = new WC_Order( $refno );
-					$order->update_status('wc-completed', __( 'Completed', 'woocommerce' ));
-					$order->payment_complete();
-					echo $echo;
-					// exit;
-				else:
-					//echo 'payment failed.';
-					$order = new WC_Order( $refno );
-					$order->update_status('failed', __( 'Failed. Signature does not match', 'woocommerce' ));
-					echo $echo;
-					// exit;
-				endif;
-			elseif($status != 1 && $signed == $ret_sign):
-				$order = new WC_Order( $refno );
-				$order->update_status('failed', __( 'Failed', 'woocommerce' ));
-				echo $echo;
-				// exit;
-			endif;
+            
+            if($status == '1' && $signed == $ret_sign):
+                //echo 'sign ok';
+                $order = new WC_Order( $refno );
+                $order->update_status('wc-completed', __( 'Completed', 'woocommerce' ));
+                $order->payment_complete();
+                echo $echo;exit;
+            else:
+                //echo 'payment failed.';
+                $order = new WC_Order( $refno );
+                $order->update_status('failed', __( 'Failed. Signature does not match', 'woocommerce' ));
+                echo $echo;exit;
+            endif;
 		endif;
 	}
 }
