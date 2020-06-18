@@ -33,22 +33,16 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
     }
     
     public function init_form_fields(){
-		
 		$pages = get_pages();
 		$poption = [];
 		foreach($pages as $page):
 			$poption[$page->ID] = $page->post_title;
 		endforeach;
-		$paymentPageID = [
-            'title'=> __( 'Choose The Page That Set For Payment Template', 'aics' ),
-            'type'=>'select',
-            'label'=> __('list of wordpress pages to choose as payment page', 'aics'),
-            'default'=>'1',
-            'options'=>$poption
-        ];
+        $currencyOptions = FaizDriver::getSupportedCurrencies();
+        
         $this->form_fields = [
             'enabled' => [
-                'title' => __( 'Enable/Disable', 'aics' ),
+                'title' => __( 'Enable/Disable ', 'aics' ),
                 'type' => 'checkbox',
                 'label' => __( 'Enable ipay88 gateway', 'aics' ),
                 'default' => 'yes'
@@ -69,7 +63,20 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
                 'type' => 'text',
                 'default' => '0000000'
             ],
-            'paymentPageID' => $paymentPageID,
+            'ipay88Currency'=>[
+                'title'=> __('Choose Currency ', 'aics'),
+                'type'=>'select',
+                'description'=> __('Only 2 currency supported for now. Send me tech specs to add more ;) ', 'aics'),
+                'default'=>'MYR',
+                'options'=>$currencyOptions
+            ],
+            'paymentPageID' =>[
+                'title'=> __( 'Choose The Page That Set For Payment Template', 'aics' ),
+                'type'=>'select',
+                'description'=> __('list of wordpress pages to choose as payment page', 'aics'),
+                'default'=>'1',
+                'options'=>$poption
+            ],
             'backendURL'=> [
                 'title'=> __('Enable Backend URL', 'aics'),
                 'type' => 'select',
@@ -92,8 +99,14 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
     
     // only call this when want to generate form.
     public function preparePayment($order_id){
-        $post_url = FaizDriver::getGatewayURL();
-        $test_pay = $this->get_option('testingPayment');
+        
+        $test_pay = $this->settings['testingPayment'];
+        $testing = false;
+        if($this->settings['testingPayment'] == 'yes'):
+            $testing = true;
+        endif;
+        $currency = $this->settings['ipay88Currency'];
+        $post_url = FaizDriver::getGatewayURL($currency, $testing);
         
         $order = wc_get_order( $order_id );
         $amount = $order->get_total();
@@ -103,10 +116,6 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
         endif;
 		
 		$amount = number_format((float)$amount, 2, '.', '');
-        
-        $currency = 'MYR';
-		//get_woocommerce_currency_symbol();
-		// currently we just need MYR support only
         
         $order_items = $order->get_items();
         $item = '';
@@ -133,11 +142,8 @@ class Aics_ipay_gateway extends WC_Payment_Gateway{
         
         $format_amt = $this->formatAmount($amount);
         $the_string = $this->merchantKey.$this->merchantID.$order_id.$format_amt.$currency;
-        //echo 'str: <b>'.$the_string.'</b>';
         $the_hash = $this->iPay88_signature($the_string);
-        
         $response_url = get_permalink($this->pageID);
-		
 		$backend_url = $this->get_option('backendURL');
         
         $site_url = site_url();
