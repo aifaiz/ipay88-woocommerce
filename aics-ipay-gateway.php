@@ -82,9 +82,9 @@ if(!function_exists('aics_backend_response')):
 
 function aics_backend_response(){
 	$ipay88 = new Aics_ipay_gateway();
-	$response = $ipay88->getResponse();
     $backendUrlParam = $_REQUEST['backendipay'];
 	if(isset($backendUrlParam) && $backendUrlParam == '1'):
+        $response = $ipay88->getResponse();
 		$ipay88->backendResponse($response);
 	endif;
 }
