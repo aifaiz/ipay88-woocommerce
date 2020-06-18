@@ -1,4 +1,4 @@
-![ipay88 woocommerce payment gateway](https://hamizulfaiz.com/hf-file/photos/shares/donate/5b41dee212609.jpg)
+![ipay88 woocommerce payment gateway](https://hamizulfaiz.com/assets/img/donate/5b41dee212609.jpg)
 
 # ipay88-woocommerce
 
