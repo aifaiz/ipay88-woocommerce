@@ -20,6 +20,7 @@ include_once(AICS_IPAY88_PATH.'/libs/page-templater.php');
 
 if(!function_exists('aics_ipay_gateway')):
 function aics_ipay_gateway(){
+    include_once(AICS_IPAY88_PATH.'libs/faiz-driver.php');
     include_once(AICS_IPAY88_PATH.'libs/faiz-gateway-class.php');
 }
 add_action('plugins_loaded', 'aics_ipay_gateway');
