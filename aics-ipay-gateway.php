@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: AiCS ipay88 Woocommerce
-Plugin URI: https://hamizulfaiz.com/
+Plugin URI: https://hamizulfaiz.com/post/plugin-ipay88-payment-gateway-untuk-woocommerce/
 Description: Malaysian ipay88 payment gateway for woocommerce
 Author: AiCS
 Author URI: http://hamizulfaiz.com/
-Version: 1.4.0
+Version: 1.5.0
 */
 
 defined( 'ABSPATH' ) or die( 'nope.. just nope' );
