@@ -2,8 +2,8 @@
 /*
 Plugin Name: AiCS ipay88 Woocommerce
 Plugin URI: https://hamizulfaiz.com/post/plugin-ipay88-payment-gateway-untuk-woocommerce/
-Description: Malaysian ipay88 payment gateway for woocommerce
-Author: AiCS
+Description: Malaysian ipay88 payment gateway for woocommerce. By HamizulFaiz
+Author: HamizulFaiz
 Author URI: http://hamizulfaiz.com/
 Version: 1.5.0
 */
